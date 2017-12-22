@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="sMs-TZ-UiA">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -223,6 +223,7 @@
                         <segue destination="YH0-NX-qF9" kind="show" identifier="toHello" id="nWW-pO-rsI"/>
                         <segue destination="Zqg-Hx-fhR" kind="show" identifier="toSend" id="mjH-Te-e3V"/>
                         <segue destination="dya-dc-AP0" kind="show" identifier="toProfile" id="tMa-IV-nCE"/>
+                        <segue destination="sMs-TZ-UiA" kind="show" identifier="AccountLogOut" id="yDI-kN-ANv"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BXS-B3-g2i" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -333,7 +334,7 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pA4-wR-9xn">
                                 <rect key="frame" x="20" y="147.99999999999997" width="374" height="426.33333333333326"/>
-                                <mutableString key="text">InstaZone respects the privacy of visitors to its application. As a result, we have developed this privacy policy.  This privacy policy applies only to operation of the application that directly lined to this application. While using this app, InstaZone may share your information with agents, contractors in connection with services that these individuals or entities perform.  This app is built by Yuanhao Zhang, and it's purely non-profitable. The public code is posted on his github and nobody should use the code without having any prior notice made to Yuanhao.  We may update this privacy policy from time to time.  Enacted: December 16, 2017</mutableString>
+                                <string key="text">InstaZone respects the privacy of visitors to its application. As a result, we have developed this privacy policy.  This privacy policy applies only to operation of the application that directly lined to this application. While using this app, InstaZone may share your information with agents, contractors in connection with services that these individuals or entities perform.  This app is built by Yuanhao Zhang, and it's purely non-profitable. The public code is posted on his github and nobody should use the code without having any prior notice made to Yuanhao.  We may update this privacy policy from time to time.  Enacted: December 16, 2017</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -373,7 +374,7 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xua-Ll-deK">
                                 <rect key="frame" x="20" y="147" width="374" height="568.33333333333337"/>
-                                <mutableString key="text">InstaZone allows users to look for friends and follow them to view their latest feeds. As a user of this app, you can post your own feed by uploading image and write a bit of summary, which will be seen by anyone who chooses to follow you.   To use this app, you have agreement to and performence under this Agreement, including:   1. any image posted will not violate any laws or rules;  2. will not use this app in any unlawful means;  3. InstaZone shall have the right to terminate your ability to access and use the InstaZone platform, including closing your account, in accordance with the comuunity guidelines, for any reasons or no reason, at any time without notice.  4. InstaZone does not make any representation and disclaims all warranties, expressed or implied, regarding the User Content, including with respect to accuracy, legality, safety, completeness or quality thereof. </mutableString>
+                                <string key="text">InstaZone allows users to look for friends and follow them to view their latest feeds. As a user of this app, you can post your own feed by uploading image and write a bit of summary, which will be seen by anyone who chooses to follow you.   To use this app, you have agreement to and performence under this Agreement, including:   1. any image posted will not violate any laws or rules;  2. will not use this app in any unlawful means;  3. InstaZone shall have the right to terminate your ability to access and use the InstaZone platform, including closing your account, in accordance with the comuunity guidelines, for any reasons or no reason, at any time without notice.  4. InstaZone does not make any representation and disclaims all warranties, expressed or implied, regarding the User Content, including with respect to accuracy, legality, safety, completeness or quality thereof. </string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -862,6 +863,45 @@
             </objects>
             <point key="canvasLocation" x="893" y="111"/>
         </scene>
+        <!--Register View Controller-->
+        <scene sceneID="85p-8n-GED">
+            <objects>
+                <viewController id="sMs-TZ-UiA" customClass="RegisterViewController" customModule="ParseStarterProject_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hrl-8p-TBB"/>
+                        <viewControllerLayoutGuide type="bottom" id="msp-se-gsL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="66J-zY-bjd">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XqP-VH-m0A">
+                                <rect key="frame" x="184" y="242" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="loginWithPhone:" destination="sMs-TZ-UiA" eventType="touchUpInside" id="KB0-pr-wy9"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3d2-6R-mIv">
+                                <rect key="frame" x="184" y="441" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="loginWithEmail:" destination="sMs-TZ-UiA" eventType="touchUpInside" id="bxG-7G-xw3"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <connections>
+                        <segue destination="CmO-OT-QAO" kind="show" identifier="showhome" id="27B-VZ-isT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dma-oR-nYz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1982" y="147"/>
+        </scene>
     </scenes>
     <resources>
         <image name="greyHeart.jpg" width="626" height="626"/>
@@ -870,8 +910,9 @@
         <image name="placeholder-image.png" width="800" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="PwV-XA-2sf"/>
-        <segue reference="tZR-xW-TR9"/>
-        <segue reference="tyw-lf-p9p"/>
+        <segue reference="xZS-Jk-0N7"/>
+        <segue reference="27B-VZ-isT"/>
+        <segue reference="Fuq-BE-og7"/>
+        <segue reference="tMa-IV-nCE"/>
     </inferredMetricsTieBreakers>
 </document>

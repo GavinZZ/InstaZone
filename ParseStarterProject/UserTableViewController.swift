@@ -9,8 +9,11 @@
 import UIKit
 import Parse
 import QuartzCore
+import AccountKit
 
 class UserTableViewController: UITableViewController {
+    
+    var accountKit: AKFAccountKit!
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         
@@ -140,6 +143,8 @@ class UserTableViewController: UITableViewController {
             
             PFUser.logOut()
             
+//            accountKit.logOut()
+            
         } else if ((PFUser.current()?.isNew) == true) {
             
             let alert = UIAlertController(title: "Incomplete user info", message: "Complete the user info right now!", preferredStyle: UIAlertControllerStyle.alert)
@@ -266,10 +271,13 @@ class UserTableViewController: UITableViewController {
         
     }
     
+    var accountID: UILabel!
+    var labeltype: UILabel!
+    var phoneornumber: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
+    
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

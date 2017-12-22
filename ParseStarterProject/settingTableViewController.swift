@@ -8,11 +8,27 @@
 
 import UIKit
 import Parse
+import AccountKit
 
 class settingTableViewController: UITableViewController {
+    
+    var accountKit: AKFAccountKit!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if accountKit == nil {
+            
+            //specify AKFResponseType.AccessToken
+            self.accountKit = AKFAccountKit(responseType: AKFResponseType.accessToken)
+            accountKit.requestAccount{
+                (account, error) -> Void in
+
+
+                
+            }
+            
+        }
  
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -110,9 +126,25 @@ class settingTableViewController: UITableViewController {
         
         if (indexPath.section == 5) {
             
-            performSegue(withIdentifier: "logOut", sender: self)
-            
             PFUser.logOut()
+            
+            accountKit.logOut()
+            
+            accountKit.logOut({ (success, error) in
+                
+                if (error != nil) {
+                    
+                    print(error)
+                    
+                } else {
+                    
+                    print("logged out successfully")
+                    
+                }
+                
+            })
+            
+            performSegue(withIdentifier: "AccountLogOut", sender: self)
             
         } else if (indexPath.section == 1) {
             

@@ -7,6 +7,6 @@ target 'ParseStarterProject-Swift' do
 
   # Pods for ParseStarterProject-Swift
 pod 'SwiftMailgun'
-
+pod 'AccountKit'
 
 end

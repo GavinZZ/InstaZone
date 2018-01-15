@@ -85,7 +85,15 @@ class UserTableViewController: UITableViewController {
             
         }
         
-        cell.summary.text = "About me..."
+        if (aboutMe[indexPath.section] != "") {
+            
+            cell.summary.text = aboutMe[indexPath.section]
+            
+        } else {
+            
+            cell.summary.text = "This person is too lazy to write a summary."
+            
+        }
         
         cell.userLabel.text = allTheUsers[indexPath.section]
     
@@ -132,6 +140,8 @@ class UserTableViewController: UITableViewController {
 //
 //        performSegue(withIdentifier: "backToInitial", sender: self)
 //    }
+    
+    var aboutMe = [String]()
 
     @IBOutlet var tableview: UITableView!
     
@@ -191,6 +201,8 @@ class UserTableViewController: UITableViewController {
                             if (object.objectId != PFUser.current()?.objectId) {
                                 
                                 self.allTheUsers.append(user["nickname"] as! String)
+                                
+                                self.aboutMe.append(user["summary"] as! String)
                                 
                                 self.profilePic.append(user["profilePic"] as! PFFile)
                                 

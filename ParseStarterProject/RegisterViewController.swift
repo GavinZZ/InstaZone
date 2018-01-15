@@ -10,14 +10,23 @@ import UIKit
 import AccountKit
 import Parse
 
+var emailAddress: String = ""
+
 class RegisterViewController: UIViewController, AKFViewControllerDelegate {
     
     var accountKit: AKFAccountKit!
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        if let email = UserDefaults.standard.object(forKey: "emailAddress") as? String {
+            
+            emailAddress = email
+            
+        }
         
         // initialize Account Kit
         if accountKit == nil {
+            print("User already logged in go to ViewController")
             // may also specify AKFResponseTypeAccessToken
             self.accountKit = AKFAccountKit(responseType: AKFResponseType.accessToken)
         }
@@ -25,69 +34,91 @@ class RegisterViewController: UIViewController, AKFViewControllerDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
 
+        
         if (accountKit.currentAccessToken != nil) {
+            accountKit.requestAccount({ (account, error) in
+                
+                if (error != nil) {
+                    
+                    print(error)
+                    
+                } else {
+                    
+                    UserDefaults.standard.set(account?.emailAddress, forKey: "emailAddress")
+                    
+                    if let email = UserDefaults.standard.object(forKey: "emailAddress") as? String {
+                        
+                        emailAddress = email
+                        
+                    }
+                    
+                }
+                
+            })
             
             // if the user is already logged in, go to the main screen
             print("User already logged in go to ViewController")
-            
             DispatchQueue.main.async {
-                self.performSegue(withIdentifier: "showhome", sender: self)
+                self.performSegue(withIdentifier: "toLogIn", sender: self)
             }
             
         }
       
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if (accountKit.currentAccessToken != nil) {
-            
-            // if the user is already logged in, go to the main screen
-            print("User already logged in go to ViewController")
-           
-        }
-        
-    }
-    
+//
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//        if (accountKit.currentAccessToken != nil) {
+//
+//            print(accountKit.currentAccessToken?.tokenString)
+//
+//            // if the user is already logged in, go to the main screen
+//            print("User already logged in go to ViewController")
+//
+//        }
+//
+//    }
+//
     
     func viewController(_ viewController: UIViewController!, didCompleteLoginWith accessToken: AKFAccessToken!, state: String!) {
         print("Login succcess with AccessToken")
-        
-        let newUser = PFUser()
-        
-        newUser["newUser"] = true
-        
-        let image = UIImage(named: "images.png")
-        
-        let imageData = UIImageJPEGRepresentation(image!, 0.5)
-        
-        let imageFile = PFFile(name: "profile.jpg", data: imageData!)
-        
-        newUser["profilePic"] = imageFile
-        
-        newUser.username = "hz351086153@qq.com"
-        
-        newUser.email = "hz351086153@qq.com"
-        
-        newUser.password = "hz000535"
-        
-        newUser.signUpInBackground(block: { (success, error) in
-            
-            if (error != nil) {
-                
-                self.createAlert(title: "Sign Up Error!", message: (error?.localizedDescription)!)
-                
-            } else {
-                
-                print("User signed up")
-                
-                self.performSegue(withIdentifier: "showUserTable", sender: self)
-                
-            }
-            
-        })
+//
+//        let newUser = PFUser()
+//
+//        newUser["newUser"] = true
+//
+//        let image = UIImage(named: "images.png")
+//
+//        let imageData = UIImageJPEGRepresentation(image!, 0.5)
+//
+//        let imageFile = PFFile(name: "profile.jpg", data: imageData!)
+//
+//        newUser["profilePic"] = imageFile
+//
+//        newUser.username = "hz351086153@qq.com"
+//
+//        newUser.email = "hz351086153@qq.com"
+//
+//        newUser.password = "hz000535"
+//
+//        newUser.signUpInBackground(block: { (success, error) in
+//
+//            if (error != nil) {
+//
+//                self.createAlert(title: "Sign Up Error!", message: (error?.localizedDescription)!)
+//
+//            } else {
+//
+//                print("User signed up")
+//
+//                self.performSegue(withIdentifier: "showUserTable", sender: self)
+//
+//            }
+//
+//        })
     }
+    
     func viewController(_ viewController: UIViewController!, didCompleteLoginWithAuthorizationCode code: String!, state: String!) {
         print("Login succcess with AuthorizationCode")
     }
@@ -113,8 +144,7 @@ class RegisterViewController: UIViewController, AKFViewControllerDelegate {
         theme.textColor = UIColor(white: 0.3, alpha: 1.0)
         theme.titleColor = UIColor(red: 0.247, green: 0.247, blue: 0.247, alpha: 1)
         loginViewController.setTheme(theme)
-        
-        
+        print(accountKit.currentAccessToken?.accountID)
     }
     
     func createAlert(title: String, message: String) {

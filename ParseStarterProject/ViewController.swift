@@ -155,6 +155,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 
                 newUser.email = email.text
                 
+                newUser["summary"] = ""
+                
                 newUser.password = password.text
                 
                 newUser.signUpInBackground(block: { (success, error) in
@@ -286,21 +288,86 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        nickname.isHidden = true
+        let query = PFUser.query()
         
-        signupOrLogin.setTitle("Log In", for: [])
+        var userExist = false
         
-        LogIn.setTitle("Sign up", for: [])
-        
-        alreadyHave.text = "Do not have an account?"
+        query?.findObjectsInBackground(block: { (objects, error) in
+            
+            if (error != nil) {
+                
+                print(error)
+                
+            } else {
+                
+                if let users = objects {
+                    
+                    for user in users {
+                        
+                        if ((user["username"] as! String) == emailAddress) {
+                            
+                            print(user["username"] as! String)
+                            
+                            userExist = true
+                            
+                        }
+                        
+                    }
+                    
+                    print(userExist)
+                    
+                    if (userExist) {
+                        
+                        self.nickname.isHidden = true
+                        
+                        self.signupOrLogin.setTitle("Log In", for: [])
+                        
+                        self.LogIn.setTitle("Sign Up", for: [])
+                        
+                        self.alreadyHave.text = "Do not have an account?"
+                        
+                        self.navigationController?.navigationBar.isHidden = true
+                        
+                        self.email.text = emailAddress
+                        
+                        self.email.isUserInteractionEnabled = false
+                        
+                        self.forgotLabel.isHidden = false
+                        
+                        self.errorLabel.isHidden = true
+                        // Do any additional setup after loading the view, typically from a nib.
+                        
+                    } else {
+                        
+                        self.signUpMode = true
+                        
+                        self.nickname.isHidden = false
+                        
+                        self.signupOrLogin.setTitle("Sign Up", for: [])
+                        
+                        self.LogIn.setTitle("Log In", for: [])
+                        
+                        self.email.text = emailAddress
+                        
+                        self.email.isUserInteractionEnabled = false
+                        
+                        self.alreadyHave.text = "Already have an account?"
+                        
+                        self.navigationController?.navigationBar.isHidden = true
+                        
+                        self.forgotLabel.isHidden = true
+                        
+                        self.errorLabel.isHidden = true
+                        // Do any additional setup after loading the view, typically from a nib.
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        })
 
-        self.navigationController?.navigationBar.isHidden = true
-        
-        forgotLabel.isHidden = false
-        
-        errorLabel.isHidden = true
-        // Do any additional setup after loading the view, typically from a nib.
-        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
